@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 
 namespace StringCalculator2021_01
@@ -62,12 +63,26 @@ namespace StringCalculator2021_01
 
         [Theory]
         [InlineData("//;\n1;2;3", 6)]
-        public void ReturnsSumGivenStringWithCustomDelimiter( 
+        public void ReturnsSumGivenStringWithCustomDelimiter(
             string numbers, int expectedResult)
         {
             var result = _calculator.Add(numbers);
 
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData("-1,2", "Negatives not allowed: -1")]
+        [InlineData("-1,-2", "Negatives not allowed: -1,-2")]
+        public void ThrowsGivenNegativeInputs(
+            string numbers, string expectedMessage)
+        {
+            Action action = () => _calculator.Add(numbers);
+
+            var ex = Assert.Throws<Exception>(action);
+
+            Assert.Equal(expectedMessage, ex.Message);
+        }
+
     }
 }
