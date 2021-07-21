@@ -84,5 +84,18 @@ namespace StringCalculator2021_01
             Assert.Equal(expectedMessage, ex.Message);
         }
 
+        [Theory]
+        [InlineData("1,2,3000", 3)]
+        [InlineData("1001,2", 2)]
+        [InlineData("1000,2", 1002)]
+        public void ReturnsSumGivenStringIgnoringValuesOver1000(
+            string numbers, int expectedResult)
+        {
+            var result = _calculator.Add(numbers);
+
+            Assert.Equal(expectedResult, result);
+        }
+
+
     }
 }

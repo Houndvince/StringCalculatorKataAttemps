@@ -36,7 +36,9 @@ namespace StringCalculator2021_01
                 throw new Exception($"Negatives not allowed: {negativeString}");
             }
 
-            var result = numberList.Sum();
+            var result = numberList
+                .Where(n => n <= 1000)
+                .Sum();
 
             return result;
         }
