@@ -5,7 +5,7 @@ namespace StringCalculator2021_01
     public class StringCalculator_Add
     {
         [Fact]
-        public void Return0GivenEmptyString()
+        public void Returns0GivenEmptyString()
         {
             var calculator = new StringCalculator();
 
@@ -17,7 +17,20 @@ namespace StringCalculator2021_01
         [Theory]
         [InlineData("1", 1)]
         [InlineData("2", 2)]
-        public void Return1GivenStringWith1(
+        public void ReturnsNumberGivenStringWithOneNumber(
+            string numbers, int expectedResult)
+        {
+            var calculator = new StringCalculator();
+
+            var result = calculator.Add(numbers);
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Theory]
+        [InlineData("1,2", 3)]
+        [InlineData("2,3", 5)]
+        public void ReturnsSumGivenStringWithTwoCommaSeparatedNumbers(
             string numbers, int expectedResult)
         {
             var calculator = new StringCalculator();
